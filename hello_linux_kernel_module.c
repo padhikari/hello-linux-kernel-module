@@ -1,8 +1,15 @@
+#include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 
-int init_module(void) {
-  printk(KERN_INFO "Hello World 1.\n");
+static int __init hello_kernel_init(void) {
+  printk(KERN_INFO "Hello, world\n");
   return 0;
 }
-void cleanup_module(void) { printk(KERN_INFO "Goodbye world 1.\n"); }
+
+static void __exit hello_kernel_exit(void) {
+  printk(KERN_INFO "Goodbye, world \n");
+}
+
+module_init(hello_kernel_init);
+module_exit(hello_kernel_exit);
